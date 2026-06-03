@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
-import { ShoppingBag, Search, Heart, Menu, X, User } from "lucide-react"
 
-export default function Navbar({ cartCount, onCartClick }) {
+export default function Navbar({ cartCount, onCartClick, onNavigate, currentView }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -11,103 +10,115 @@ export default function Navbar({ cartCount, onCartClick }) {
     return () => window.removeEventListener("scroll", fn)
   }, [])
 
+  const handleNav = (target) => {
+    setMobileOpen(false)
+    if (currentView !== "shop") {
+      onNavigate("shop")
+      setTimeout(() => {
+        const el = document.getElementById(target)
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    } else {
+      const el = document.getElementById(target)
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-teal text-white text-center text-xs font-body font-semibold py-2 tracking-widest uppercase">
-        ✨ Envío gratis sobre $15.000 &nbsp;·&nbsp; Todo Chile &nbsp;·&nbsp; Hecho a mano con amor 🎀
+      <div className="bg-ink text-white text-center text-[11px] font-body font-semibold py-2.5 tracking-[0.2em] uppercase">
+        Envíos disponibles a todo el país &nbsp;&middot;&nbsp; Diseño y confección artesanal
       </div>
 
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-card border-b border-dust"
-          : "bg-sand border-b border-lace"
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-[68px]">
-
+      <header
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-dust"
+            : "bg-white border-b border-dust/50"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <a href="/" className="flex-shrink-0">
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              onNavigate("shop")
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            }}
+            className="flex-shrink-0"
+          >
             <img
-              src="/logo.png"
+              src="/image_11cb63.png"
               alt="Mechitas Mechonas"
-              className="h-11 w-auto object-contain"
+              className="h-10 w-auto object-contain"
             />
           </a>
 
           {/* Nav — desktop */}
           <nav className="hidden lg:flex items-center gap-1">
             {[
-              { label: "Inicio", href: "#" },
-              { label: "Accesorios Pelo 🎀", href: "#pelo" },
-              { label: "Para Mascotas 🐾", href: "#mascotas" },
-              { label: "Novedades", href: "#novedades" },
-              { label: "Nosotros", href: "#nosotros" },
-            ].map(link => (
-              <a
+              { label: "Inicio", target: "hero" },
+              { label: "Catálogo", target: "catalogo" },
+              { label: "Nosotros", target: "nosotros" },
+            ].map((link) => (
+              <button
                 key={link.label}
-                href={link.href}
-                className="font-body font-semibold text-[13px] text-ink/70 hover:text-teal px-3.5 py-2 rounded-full hover:bg-teal-pale transition-all duration-200"
+                onClick={() => handleNav(link.target)}
+                className="font-body font-semibold text-[13px] text-ink/75 hover:text-ink px-4 py-2 rounded-full hover:bg-sand transition-all duration-300"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-1.5">
-            <button aria-label="Buscar" className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-ink/50 hover:text-teal hover:bg-teal-pale transition-all duration-200">
-              <Search size={17} />
-            </button>
-            <button aria-label="Favoritos" className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-ink/50 hover:text-rose-dark hover:bg-rose-blush transition-all duration-200">
-              <Heart size={17} />
-            </button>
-            <button aria-label="Cuenta" className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-ink/50 hover:text-teal hover:bg-teal-pale transition-all duration-200">
-              <User size={17} />
-            </button>
-
-            {/* Cart */}
+          <div className="flex items-center gap-2">
+            {/* Cart button — text only */}
             <button
               onClick={onCartClick}
-              aria-label={`Carrito — ${cartCount} productos`}
-              className="relative flex items-center gap-2 bg-teal hover:bg-teal-dark text-white rounded-full px-4 py-2 font-semibold text-[13px] transition-all duration-200 hover:shadow-teal"
+              id="cart-button"
+              className="relative flex items-center gap-2 bg-ink hover:bg-ink/90 text-white rounded-full px-5 py-2.5 font-semibold text-[13px] transition-all duration-300"
             >
-              <ShoppingBag size={16} />
-              <span className="hidden sm:inline">Carrito</span>
+              <span>Carrito</span>
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-rose-berry text-white text-[10px] font-bold flex items-center justify-center leading-none border-2 border-white">
+                <span className="bg-teal-dark text-white text-[11px] font-bold rounded-full min-w-[22px] h-[22px] flex items-center justify-center leading-none px-1">
                   {cartCount}
                 </span>
               )}
             </button>
 
-            {/* Mobile menu toggle */}
+            {/* Mobile menu toggle — text only */}
             <button
-              onClick={() => setMobileOpen(o => !o)}
-              className="lg:hidden w-9 h-9 rounded-full flex items-center justify-center text-ink/60 hover:bg-teal-pale hover:text-teal transition-all duration-200"
-              aria-label="Menú"
+              onClick={() => setMobileOpen((o) => !o)}
+              className="lg:hidden rounded-full px-4 py-2 text-[13px] font-semibold text-ink/75 hover:text-ink hover:bg-sand transition-all duration-300"
+              aria-label="Menú de navegación"
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileOpen ? "Cerrar" : "Menú"}
             </button>
           </div>
         </div>
 
         {/* Mobile menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? "max-h-64" : "max-h-0"}`}>
-          <nav className="flex flex-col px-6 py-4 gap-1 bg-pearl border-t border-dust">
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
+            mobileOpen ? "max-h-[400px]" : "max-h-0"
+          }`}
+        >
+          <nav className="flex flex-col px-6 py-4 gap-2 bg-white border-t border-dust">
             {[
-              { label: "Inicio", href: "#" },
-              { label: "Accesorios Pelo 🎀", href: "#pelo" },
-              { label: "Para Mascotas 🐾", href: "#mascotas" },
-              { label: "Novedades", href: "#novedades" },
-            ].map(link => (
-              <a
+              { label: "Inicio", target: "hero" },
+              { label: "Catálogo", target: "catalogo" },
+              { label: "Nosotros", target: "nosotros" },
+            ].map((link) => (
+              <button
                 key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="font-semibold text-sm text-ink/70 hover:text-teal py-2 px-3 rounded-xl hover:bg-teal-pale transition-all"
+                onClick={() => handleNav(link.target)}
+                className="font-semibold text-sm text-ink/75 hover:text-ink py-2.5 px-4 rounded-xl hover:bg-sand transition-all text-left"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </nav>
         </div>
