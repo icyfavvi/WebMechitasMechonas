@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { supabase } from "../lib/supabase"
+
 export default function Checkout({ items, total, onBack }) {
   const [step, setStep] = useState(1)
   const [form, setForm] = useState({
@@ -35,7 +36,7 @@ export default function Checkout({ items, total, onBack }) {
     }
   }
 
- const handlePayment = async () => {
+const handlePayment = async () => {
   const { data, error } = await supabase
     .from("orders")
     .insert([

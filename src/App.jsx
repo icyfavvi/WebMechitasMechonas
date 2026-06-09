@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import ProductCatalog from "./components/ProductCatalog"
@@ -19,19 +19,6 @@ export default function App() {
   // Search & filter state
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
-
-useEffect(() => {
-  async function testSupabase() {
-    const { data, error } = await supabase
-      .from("orders")
-      .select("*")
-
-    console.log("SUPABASE DATA:", data)
-    console.log("SUPABASE ERROR:", error)
-  }
-
-  testSupabase()
-}, [])
   // Cart operations
   const addToCart = (product) => {
     setCart((prev) => {
