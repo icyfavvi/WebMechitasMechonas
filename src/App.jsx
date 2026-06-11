@@ -1,15 +1,17 @@
+
 // src/App.jsx
 import { useState, useEffect, useCallback } from "react"
-import Navbar         from "./components/Navbar"
-import Hero           from "./components/Hero"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+
 import ProductCatalog from "./components/ProductCatalog"
-import Footer         from "./components/Footer"
-import CartOffcanvas  from "./components/CartOffcanvas"
-import Checkout       from "./components/Checkout"
-import AuthModal      from "./components/AuthModal"
-import UserPanel      from "./components/UserPanel"
-import AdminPanel     from "./components/AdminPanel"
-import { PRODUCTS }   from "./data/products"
+import Footer from "./components/Footer"
+import CartOffcanvas from "./components/CartOffcanvas"
+import Checkout from "./components/Checkout"
+import AuthModal from "./components/AuthModal"
+import UserPanel from "./components/UserPanel"
+import AdminPanel from "./components/AdminPanel"
+import { PRODUCTS } from "./data/products"
 import { supabase, checkIsAdmin } from "./lib/supabase"
 
 export default function App() {

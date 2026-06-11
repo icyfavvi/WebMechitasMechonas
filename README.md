@@ -93,3 +93,40 @@ Inicio (Hero) → Catálogo (buscar/filtrar) → Agregar al Carrito → Ir a Pag
 
 - Instagram: https://www.instagram.com/mechitas_mechonas/
 - TikTok: https://www.tiktok.com/@mechitas_mechonas
+## Configuración de variables de entorno
+
+Este proyecto utiliza Supabase como backend para almacenar los pedidos realizados por los usuarios.
+
+Por motivos de seguridad, las credenciales de Supabase no se almacenan en el repositorio. Cada integrante del equipo debe crear un archivo llamado `.env` en la raíz del proyecto con el siguiente formato:
+
+```env
+VITE_SUPABASE_URL=https://gdbvvezpvwvsplaqcoot.supabase.co
+VITE_SUPABASE_ANON_KEY=TU_CLAVE_PUBLICA_DE_SUPABASE
+```
+
+### Instalación
+
+1. Clonar el repositorio.
+2. Instalar dependencias:
+
+```bash
+npm install
+```
+
+3. Crear el archivo `.env` utilizando la configuración anterior.
+4. Iniciar el proyecto:
+
+```bash
+npm run dev
+```
+
+### Importante
+
+* El archivo `.env` está incluido en `.gitignore`, por lo que no se subirá a GitHub.
+* Nunca compartir ni subir claves privadas (Secret Keys).
+* Utilizar únicamente la clave pública (Publishable Key) proporcionada por Supabase.
+
+Si las variables de entorno no están configuradas correctamente, las funciones relacionadas con la base de datos no podrán conectarse a Supabase.
+
+```
+```
