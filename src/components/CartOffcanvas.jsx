@@ -52,9 +52,7 @@ export default function CartOffcanvas({
           {items.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center gap-4 text-center py-16">
               <div className="w-20 h-20 bg-sand rounded-full flex items-center justify-center mb-2">
-                <span className="text-ink/30 font-display font-bold text-2xl">
-                  0
-                </span>
+                <span className="text-ink/30 font-display font-bold text-2xl">0</span>
               </div>
               <p className="font-display font-bold text-ink text-xl">
                 Tu carrito está vacío
@@ -90,7 +88,7 @@ export default function CartOffcanvas({
                     ${(item.price * item.qty).toLocaleString("es-CL")}
                   </p>
 
-                  {/* Qty controls — text only */}
+                  {/* Qty controls */}
                   <div className="flex items-center gap-2 mt-1.5">
                     <button
                       onClick={() => onUpdateQty(item.id, item.qty - 1)}
@@ -125,11 +123,17 @@ export default function CartOffcanvas({
         {/* Footer */}
         {items.length > 0 && (
           <div className="px-6 py-6 border-t border-dust bg-sand/30 flex flex-col gap-5">
-            <div className="flex justify-between items-center">
-              <span className="font-body text-mist text-base">Subtotal</span>
-              <span className="font-display font-black text-2xl text-ink">
-                ${total.toLocaleString("es-CL")}
-              </span>
+            <div className="flex flex-col gap-1">
+              <div className="flex justify-between items-center">
+                <span className="font-body text-mist text-base">Subtotal</span>
+                <span className="font-display font-black text-2xl text-ink">
+                  ${total.toLocaleString("es-CL")}
+                </span>
+              </div>
+              {/* Nota de envío */}
+              <p className="font-body text-xs text-mist text-right">
+                Costo de envio se calcula al finalizar
+              </p>
             </div>
 
             <button
