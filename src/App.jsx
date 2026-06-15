@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
-
+import LocationsSection from "./components/LocationsSection"
 import ProductCatalog from "./components/ProductCatalog"
 import Footer from "./components/Footer"
 import CartOffcanvas from "./components/CartOffcanvas"
@@ -58,7 +58,10 @@ export default function App() {
     )
     return () => subscription.unsubscribe()
   }, [handleUserChange])
-
+// ── pagina ubicaciones ───────────────────────────────────────────────────────────────
+{view === "locations" && (
+  <LocationsSection />
+)}
   // ── Carrito ───────────────────────────────────────────────────────────────
   const addToCart = (product) => {
     setCart((prev) => {
@@ -167,19 +170,22 @@ export default function App() {
       />
 
       {view === "shop" && (
-        <>
-          <Hero onNavigate={handleNavigate} />
-          <ProductCatalog
-            products={PRODUCTS}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            onAddToCart={addToCart}
-          />
-        </>
-      )}
+  <>
+    <Hero onNavigate={handleNavigate} />
 
+    <ProductCatalog
+      products={PRODUCTS}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      selectedCategory={selectedCategory}
+      setSelectedCategory={setSelectedCategory}
+      onAddToCart={addToCart}
+    />
+  </>
+)}
+{view === "locations" && (
+  <LocationsSection />
+)}
       {view === "checkout" && (
         <Checkout
           items={cart}
@@ -199,8 +205,11 @@ export default function App() {
       )}
 
       {view === "admin" && isAdmin && (
-        <AdminPanel onLogout={handleLogout} />
-      )}
+  <AdminPanel
+    onLogout={handleLogout}
+    onNavigate={handleNavigate}
+  />
+)}
 
       {/* Footer — oculto en paneles de usuario/admin */}
       {view !== "admin" && view !== "account" && <Footer />}

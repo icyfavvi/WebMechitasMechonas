@@ -26,19 +26,27 @@ export default function Navbar({
   }, [])
 
   const handleNav = (target) => {
-    setMobileOpen(false)
-    setAccountOpen(false)
-    if (currentView !== "shop") {
-      onNavigate("shop")
-      setTimeout(() => {
-        const el = document.getElementById(target)
-        if (el) el.scrollIntoView({ behavior: "smooth" })
-      }, 100)
-    } else {
+  setMobileOpen(false)
+  setAccountOpen(false)
+
+  // Nueva página de ubicaciones
+  if (target === "locations") {
+    onNavigate("locations")
+    return
+  }
+
+  if (currentView !== "shop") {
+    onNavigate("shop")
+
+    setTimeout(() => {
       const el = document.getElementById(target)
       if (el) el.scrollIntoView({ behavior: "smooth" })
-    }
+    }, 100)
+  } else {
+    const el = document.getElementById(target)
+    if (el) el.scrollIntoView({ behavior: "smooth" })
   }
+}
 
   const nombreCorto =
     user?.user_metadata?.nombre?.split(" ")[0] ??
@@ -73,9 +81,10 @@ export default function Navbar({
           {/* Navegación — escritorio */}
           <nav className="hidden lg:flex items-center gap-1">
             {[
-              { label: "Inicio",    target: "hero" },
-              { label: "Catálogo",  target: "catalogo" },
-              { label: "Nosotros",  target: "nosotros" },
+              { label: "Inicio",        target: "hero" },
+              { label: "Catálogo",      target: "catalogo" },
+              { label: "Ubicaciones", target: "locations" },
+              { label: "Nosotros",      target: "nosotros" },
             ].map((link) => (
               <button key={link.label} onClick={() => handleNav(link.target)}
                 className="font-body font-semibold text-[13px] text-ink/75 hover:text-ink px-4 py-2 rounded-full hover:bg-sand transition-all duration-300">
@@ -150,9 +159,10 @@ export default function Navbar({
         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? "max-h-[500px]" : "max-h-0"}`}>
           <nav className="flex flex-col px-6 py-4 gap-1 bg-white border-t border-dust">
             {[
-              { label: "Inicio",   target: "hero" },
-              { label: "Catálogo", target: "catalogo" },
-              { label: "Nosotros", target: "nosotros" },
+              { label: "Inicio",       target: "hero" },
+              { label: "Catálogo",     target: "catalogo" },
+              { label: "Ubicaciones", target: "locations" },
+              { label: "Nosotros",     target: "nosotros" },
             ].map((link) => (
               <button key={link.label} onClick={() => handleNav(link.target)}
                 className="font-semibold text-sm text-ink/75 hover:text-ink py-2.5 px-4 rounded-xl hover:bg-sand transition-all text-left">

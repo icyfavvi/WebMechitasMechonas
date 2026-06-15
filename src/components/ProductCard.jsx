@@ -4,14 +4,19 @@ export default function ProductCard({ product, onAddToCart }) {
   const [added, setAdded] = useState(false)
   const [imgErr, setImgErr] = useState(false)
 
+  // Precio efectivo: si está en oferta y tiene sale_price, ese es el precio a cobrar
+  const onSale = product.on_sale && product.sale_price != null
+  const displayPrice = onSale ? product.sale_price : product.price
+
   const handleAdd = () => {
-    onAddToCart?.(product)
+    // Se agrega al carrito con el precio efectivo (oferta si aplica)
+    onAddToCart?.({ ...product, price: displayPrice })
     setAdded(true)
     setTimeout(() => setAdded(false), 1800)
   }
 
-  const disc = product.originalPrice
-    ? Math.round((1 - product.price / product.originalPrice) * 100)
+  const disc = onSale
+    ? Math.round((1 - product.sale_price / product.price) * 100)
     : null
 
   const isPet = product.category === "pet"
@@ -24,15 +29,13 @@ export default function ProductCard({ product, onAddToCart }) {
           : "bg-white border-dust hover:shadow-rose"
       }`}
     >
-      {/* Image area */}
-      <div
-        className={`relative aspect-square overflow-hidden ${
-          isPet
-            ? "bg-gradient-to-br from-gold-pale to-[#fff8dc]"
-            : "bg-gradient-to-br from-teal-pale to-rose-blush"
-        }`}
-      >
-        {!imgErr ? (
+      {/* Imagen */}
+      <div className={`relative aspect-square overflow-hidden ${
+        isPet
+          ? "bg-gradient-to-br from-gold-pale to-[#fff8dc]"
+          : "bg-gradient-to-br from-teal-pale to-rose-blush"
+      }`}>
+        {!imgErr && product.image ? (
           <img
             src={product.image}
             alt={product.name}
@@ -41,50 +44,55 @@ export default function ProductCard({ product, onAddToCart }) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-mist font-body text-sm font-semibold">
-              Imagen no disponible
-            </span>
+            <span className="text-mist font-body text-sm font-semibold">Imagen no disponible</span>
           </div>
         )}
 
-        {/* Badge — text only */}
-        {product.tag && (
-          <span
-            className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide ${
-              product.tag === "nuevo"
-                ? "bg-teal text-white"
-                : "bg-rose-berry text-white"
-            }`}
-          >
-            {product.tag === "nuevo" ? "Nuevo" : disc ? `-${disc}%` : "Oferta"}
+        {/* Etiqueta de oferta */}
+        {onSale && (
+          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide bg-rose-berry text-white">
+            ¡Oferta!{disc ? ` -${disc}%` : ""}
           </span>
         )}
       </div>
 
-      {/* Body */}
+      {/* Cuerpo */}
       <div className="flex flex-col flex-1 p-4 gap-2.5">
-        {/* Name */}
         <h3 className="font-display font-bold text-[15px] text-ink leading-snug line-clamp-2">
           {product.name}
         </h3>
 
-        {/* Price */}
+        {/* Descripción corta */}
+        {product.description && (
+          <p className="font-body text-xs text-mist line-clamp-2 -mt-1">
+            {product.description}
+          </p>
+        )}
+
+        {/* Tallas */}
+        {product.sizes?.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {product.sizes.map((s) => (
+              <span key={s} className="font-body text-[10px] font-semibold text-ink/60 bg-sand border border-dust rounded-full px-2 py-0.5">
+                {s}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Precio */}
         <div className="flex items-baseline gap-2 mt-auto">
-          <span
-            className={`font-body font-black text-lg ${
-              isPet ? "text-teal-dark" : "text-rose-berry"
-            }`}
-          >
-            ${product.price.toLocaleString("es-CL")}
+          <span className={`font-body font-black text-lg ${isPet ? "text-teal-dark" : "text-rose-berry"}`}>
+            ${displayPrice.toLocaleString("es-CL")}
           </span>
-          {product.originalPrice && (
+          {onSale && (
             <span className="font-body text-dust text-sm line-through">
-              ${product.originalPrice.toLocaleString("es-CL")}
+              ${product.price.toLocaleString("es-CL")}
             </span>
           )}
         </div>
 
-        {/* CTA — text only, "Agregar" */}
+        {/* Botón agregar */}
         <button
           onClick={handleAdd}
           id={`add-product-${product.id}`}
