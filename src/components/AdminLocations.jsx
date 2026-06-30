@@ -90,57 +90,57 @@ export default function AdminLocations() {
     catch { alert("No se pudo cambiar el estado.") }
   }
 
-  const inp = "w-full bg-white border border-dust rounded-xl px-4 py-2.5 text-sm font-body text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-all placeholder:text-mist"
+  const inp = "w-full bg-white border border-neutral-200 rounded-xl px-4 py-2.5 text-sm font-body text-dark outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-neutral-500"
 
   // ── Formulario (crear/editar) ──────────────────────────────────────────────
   if (editing) {
     return (
       <div className="flex flex-col gap-5">
         <div className="flex items-center justify-between">
-          <h3 className="font-display font-bold text-lg text-ink">
+          <h3 className="font-display font-bold text-lg text-dark">
             {editing === "new" ? "Nueva ubicación" : "Editar ubicación"}
           </h3>
           <button onClick={closeForm}
-            className="font-body text-sm font-semibold text-mist hover:text-ink px-3 py-1.5 rounded-full hover:bg-sand transition-all">
+            className="font-body text-sm font-semibold text-neutral-500 hover:text-dark px-3 py-1.5 rounded-full hover:bg-neutral-100 transition-all">
             Cancelar
           </button>
         </div>
 
         {error && (
-          <div className="bg-rose-blush border border-rose-berry/30 rounded-xl px-4 py-3">
-            <p className="font-body text-xs text-rose-berry font-semibold">{error}</p>
+          <div className="bg-rose-blush border border-red-200 rounded-xl px-4 py-3">
+            <p className="font-body text-xs text-red-500 font-semibold">{error}</p>
           </div>
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <label className="font-body text-sm font-semibold text-ink mb-1.5 block">Nombre del evento</label>
+            <label className="font-body text-sm font-semibold text-dark mb-1.5 block">Nombre del evento</label>
             <input className={inp} placeholder="Ej: Feria Artesanal Parque Forestal"
               value={form.name} onChange={(e) => setField("name", e.target.value)} />
           </div>
           <div className="sm:col-span-2">
-            <label className="font-body text-sm font-semibold text-ink mb-1.5 block">Descripción</label>
+            <label className="font-body text-sm font-semibold text-dark mb-1.5 block">Descripción</label>
             <input className={inp} placeholder="Ej: Puesto en la entrada principal"
               value={form.description} onChange={(e) => setField("description", e.target.value)} />
           </div>
           <div className="sm:col-span-2">
-            <label className="font-body text-sm font-semibold text-ink mb-1.5 block">Dirección (opcional)</label>
+            <label className="font-body text-sm font-semibold text-dark mb-1.5 block">Dirección (opcional)</label>
             <input className={inp} placeholder="Ej: Av. Cardenal José María Caro 123"
               value={form.address} onChange={(e) => setField("address", e.target.value)} />
           </div>
           <div>
-            <label className="font-body text-sm font-semibold text-ink mb-1.5 block">Fecha</label>
+            <label className="font-body text-sm font-semibold text-dark mb-1.5 block">Fecha</label>
             <input type="date" className={inp}
               value={form.event_date} onChange={(e) => setField("event_date", e.target.value)} />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="font-body text-sm font-semibold text-ink mb-1.5 block">Hora inicio</label>
+              <label className="font-body text-sm font-semibold text-dark mb-1.5 block">Hora inicio</label>
               <input type="time" className={inp}
                 value={form.start_time} onChange={(e) => setField("start_time", e.target.value)} />
             </div>
             <div>
-              <label className="font-body text-sm font-semibold text-ink mb-1.5 block">Hora fin</label>
+              <label className="font-body text-sm font-semibold text-dark mb-1.5 block">Hora fin</label>
               <input type="time" className={inp}
                 value={form.end_time} onChange={(e) => setField("end_time", e.target.value)} />
             </div>
@@ -149,18 +149,18 @@ export default function AdminLocations() {
 
         {/* Mapa selector */}
         <div>
-          <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+          <label className="font-body text-sm font-semibold text-dark mb-1.5 block">
             Ubicación en el mapa — haz clic para marcar el punto
           </label>
           <Suspense fallback={
-            <div className="bg-sand rounded-2xl border border-dust h-[300px] flex items-center justify-center">
-              <p className="font-body text-sm text-mist">Cargando mapa...</p>
+            <div className="bg-neutral-50 rounded-2xl border border-neutral-200 h-[300px] flex items-center justify-center">
+              <p className="font-body text-sm text-neutral-500">Cargando mapa...</p>
             </div>
           }>
             <LocationPickerMap lat={form.latitude} lng={form.longitude} onPick={handlePick} />
           </Suspense>
           {form.latitude != null && (
-            <p className="font-body text-xs text-mist mt-2">
+            <p className="font-body text-xs text-neutral-500 mt-2">
               Coordenadas seleccionadas: {form.latitude.toFixed(5)}, {form.longitude.toFixed(5)}
             </p>
           )}
@@ -170,14 +170,14 @@ export default function AdminLocations() {
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" checked={form.active}
             onChange={(e) => setField("active", e.target.checked)}
-            className="w-4 h-4 accent-teal" />
-          <span className="font-body text-sm text-ink">
+            className="w-4 h-4 accent-primary" />
+          <span className="font-body text-sm text-dark">
             Visible para clientes (activa)
           </span>
         </label>
 
         <button onClick={handleSave} disabled={saving}
-          className="w-full bg-ink hover:bg-ink/90 disabled:opacity-60 text-white font-bold rounded-full py-3.5 transition-all text-sm">
+          className="w-full bg-primary hover:bg-primary-dark disabled:opacity-60 text-white font-bold rounded-full py-3.5 transition-all text-sm">
           {saving ? "Guardando..." : "Guardar ubicación"}
         </button>
       </div>
@@ -188,39 +188,39 @@ export default function AdminLocations() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-display font-bold text-lg text-ink">Ubicaciones</h3>
+        <h3 className="font-display font-bold text-lg text-dark">Ubicaciones</h3>
         <button onClick={openNew}
-          className="bg-ink hover:bg-ink/90 text-white font-bold rounded-full px-5 py-2.5 text-sm transition-all">
+          className="bg-primary hover:bg-primary-dark text-white font-bold rounded-full px-5 py-2.5 text-sm transition-all">
           Nueva ubicación
         </button>
       </div>
 
       {loading ? (
-        <div className="bg-white rounded-2xl border border-dust p-12 text-center">
-          <p className="font-body text-sm text-mist">Cargando...</p>
+        <div className="bg-white rounded-2xl border border-neutral-200 p-12 text-center">
+          <p className="font-body text-sm text-neutral-500">Cargando...</p>
         </div>
       ) : locations.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dust p-12 text-center">
-          <p className="font-display font-bold text-lg text-ink mb-2">Sin ubicaciones</p>
-          <p className="font-body text-sm text-mist">Crea tu primera ubicación de feria o evento.</p>
+        <div className="bg-white rounded-2xl border border-neutral-200 p-12 text-center">
+          <p className="font-display font-bold text-lg text-dark mb-2">Sin ubicaciones</p>
+          <p className="font-body text-sm text-neutral-500">Crea tu primera ubicación de feria o evento.</p>
         </div>
       ) : (
         <div className="flex flex-col gap-3">
           {locations.map((loc) => (
             <div key={loc.id}
-              className="bg-white rounded-2xl border border-dust p-4 flex flex-wrap items-center justify-between gap-3">
+              className="bg-white rounded-2xl border border-neutral-200 p-4 flex flex-wrap items-center justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-display font-bold text-sm text-ink">{loc.name}</span>
+                  <span className="font-display font-bold text-sm text-dark">{loc.name}</span>
                   <span className={`text-xs font-semibold rounded-full px-2.5 py-0.5 border ${
                     loc.active
-                      ? "bg-teal-pale text-teal-dark border-teal/30"
-                      : "bg-sand text-mist border-dust"
+                      ? "bg-primary-50 text-primary border-primary/30"
+                      : "bg-neutral-50 text-neutral-500 border-neutral-200"
                   }`}>
                     {loc.active ? "Activa" : "Oculta"}
                   </span>
                 </div>
-                <p className="font-body text-xs text-mist mt-1">
+                <p className="font-body text-xs text-neutral-500 mt-1">
                   {fmtFecha(loc.event_date)}
                   {loc.start_time && ` · ${loc.start_time.slice(0,5)}`}
                   {loc.end_time && ` a ${loc.end_time.slice(0,5)}`}
@@ -229,15 +229,15 @@ export default function AdminLocations() {
               </div>
               <div className="flex items-center gap-2">
                 <button onClick={() => toggleActive(loc)}
-                  className="font-body font-semibold text-xs text-mist hover:text-ink px-3 py-1.5 rounded-full border border-dust hover:border-ink/30 transition-all">
+                  className="font-body font-semibold text-xs text-neutral-500 hover:text-dark px-3 py-1.5 rounded-full border border-neutral-200 hover:border-primary/30 transition-all">
                   {loc.active ? "Ocultar" : "Mostrar"}
                 </button>
                 <button onClick={() => openEdit(loc)}
-                  className="font-body font-semibold text-xs text-ink px-3 py-1.5 rounded-full border border-dust hover:border-ink/30 transition-all">
+                  className="font-body font-semibold text-xs text-dark px-3 py-1.5 rounded-full border border-neutral-200 hover:border-primary/30 transition-all">
                   Editar
                 </button>
                 <button onClick={() => handleDelete(loc)}
-                  className="font-body font-semibold text-xs text-rose-berry px-3 py-1.5 rounded-full border border-rose-petal hover:bg-rose-blush transition-all">
+                  className="font-body font-semibold text-xs text-red-500 px-3 py-1.5 rounded-full border border-red-200 hover:bg-red-50 transition-all">
                   Eliminar
                 </button>
               </div>

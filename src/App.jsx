@@ -3,6 +3,8 @@ import { useState, useEffect, useCallback } from "react"
 import Navbar           from "./components/Navbar"
 import Hero             from "./components/Hero"
 import LocationsSection from "./components/LocationsSection"
+import ValoresSection     from "./components/ValoresSection"
+import CategoriesCircles  from "./components/CategoriesCircles"
 import ProductCatalog   from "./components/ProductCatalog"
 import Footer           from "./components/Footer"
 import CartOffcanvas    from "./components/CartOffcanvas"
@@ -140,7 +142,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-sand font-body overflow-x-hidden">
+    <div className="min-h-screen bg-white font-body overflow-x-hidden">
       <Navbar
         cartCount={cartCount}
         onCartClick={() => setDrawerOpen(true)}
@@ -155,6 +157,13 @@ export default function App() {
       {view === "shop" && (
         <>
           <Hero onNavigate={handleNavigate} />
+          <ValoresSection />
+          <CategoriesCircles onNavigateToCategory={(cat) => {
+            setSearchQuery(cat);
+            setSelectedCategory("all");
+            const el = document.getElementById("catalogo");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }} />
           <ProductCatalog
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}

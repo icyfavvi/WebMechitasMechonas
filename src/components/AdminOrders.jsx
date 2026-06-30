@@ -46,7 +46,7 @@ function StatusBadge({ statusKey, size = "sm" }) {
 // ── Línea de tiempo del historial ─────────────────────────────────────────────
 function StatusTimeline({ history }) {
   if (!history?.length) return (
-    <p className="font-body text-xs text-mist italic">Sin historial registrado.</p>
+    <p className="font-body text-xs text-neutral-500 italic">Sin historial registrado.</p>
   )
   return (
     <div className="flex flex-col">
@@ -63,20 +63,20 @@ function StatusTimeline({ history }) {
                 }}
               />
               {i < arr.length - 1 && (
-                <div className="w-px flex-1 mt-1 mb-1 bg-dust" />
+                <div className="w-px flex-1 mt-1 mb-1 bg-neutral-200" />
               )}
             </div>
             <div className="pb-4">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-body font-semibold text-sm text-ink">
+                <span className="font-body font-semibold text-sm text-dark">
                   {st?.label ?? entry.status}
                 </span>
-                <span className="font-body text-xs text-mist">
+                <span className="font-body text-xs text-neutral-500">
                   {fmtFechaHora(entry.timestamp)}
                 </span>
               </div>
               {entry.note && (
-                <p className="font-body text-xs text-mist mt-0.5 italic">"{entry.note}"</p>
+                <p className="font-body text-xs text-neutral-500 mt-0.5 italic">"{entry.note}"</p>
               )}
             </div>
           </div>
@@ -93,22 +93,22 @@ function OrderDetail({ order, onClose, onRequestChange }) {
   return (
     <div className="fixed inset-0 z-50 flex">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-dark/50 backdrop-blur-sm" onClick={onClose} />
 
       {/* Panel */}
       <div className="relative ml-auto w-full max-w-xl bg-white h-full overflow-y-auto shadow-2xl">
 
         {/* Cabecera fija */}
-        <div className="sticky top-0 z-10 bg-white border-b border-dust px-6 py-4 flex items-center justify-between">
+        <div className="sticky top-0 z-10 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
           <div>
-            <p className="font-body text-[10px] text-mist uppercase tracking-wider">Pedido</p>
-            <h3 className="font-display font-bold text-lg text-ink leading-tight">{order.id}</h3>
+            <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">Pedido</p>
+            <h3 className="font-display font-bold text-lg text-dark leading-tight">{order.id}</h3>
           </div>
           <div className="flex items-center gap-3">
             <StatusBadge statusKey={order.status} size="md" />
             <button
               onClick={onClose}
-              className="font-body text-sm font-semibold text-mist hover:text-ink px-3 py-1.5 rounded-full hover:bg-sand transition-all"
+              className="font-body text-sm font-semibold text-neutral-500 hover:text-dark px-3 py-1.5 rounded-full hover:bg-neutral-50 transition-all"
             >
               Cerrar
             </button>
@@ -119,10 +119,10 @@ function OrderDetail({ order, onClose, onRequestChange }) {
 
           {/* ── Sección: Datos del cliente ── */}
           <div>
-            <p className="font-body text-[10px] font-bold text-mist uppercase tracking-[.12em] mb-3">
+            <p className="font-body text-[10px] font-bold text-neutral-500 uppercase tracking-[.12em] mb-3">
               Datos del cliente
             </p>
-            <div className="bg-sand rounded-2xl p-4 grid grid-cols-2 gap-x-4 gap-y-3">
+            <div className="bg-neutral-50 rounded-2xl p-4 grid grid-cols-2 gap-x-4 gap-y-3">
               {[
                 { l: "Nombre",              v: order.customer_name,    full: true },
                 { l: "Correo electrónico",  v: order.customer_email,   full: true },
@@ -133,47 +133,47 @@ function OrderDetail({ order, onClose, onRequestChange }) {
                 { l: "Región",              v: order.customer_region,  full: false },
               ].map(({ l, v, full }) => (
                 <div key={l} className={full ? "col-span-2" : ""}>
-                  <p className="font-body text-[10px] text-mist uppercase tracking-wider">{l}</p>
-                  <p className="font-body font-semibold text-sm text-ink mt-0.5 break-words">{v || "—"}</p>
+                  <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">{l}</p>
+                  <p className="font-body font-semibold text-sm text-dark mt-0.5 break-words">{v || "—"}</p>
                 </div>
               ))}
             </div>
 
             {/* Observaciones (solo si hay) */}
             {order.notes && (
-              <div className="mt-3 bg-gold/10 border border-gold/30 rounded-xl p-3">
-                <p className="font-body text-[10px] text-mist uppercase tracking-wider mb-1">
+              <div className="mt-3 bg-yellow-50 border border-yellow-200 rounded-xl p-3">
+                <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider mb-1">
                   Observaciones del cliente
                 </p>
-                <p className="font-body text-sm text-ink">{order.notes}</p>
+                <p className="font-body text-sm text-dark">{order.notes}</p>
               </div>
             )}
           </div>
 
           {/* ── Sección: Información de envío ── */}
           <div>
-            <p className="font-body text-[10px] font-bold text-mist uppercase tracking-[.12em] mb-3">
+            <p className="font-body text-[10px] font-bold text-neutral-500 uppercase tracking-[.12em] mb-3">
               Envío
             </p>
-            <div className="bg-sand rounded-2xl p-4 grid grid-cols-2 gap-x-4 gap-y-3">
+            <div className="bg-neutral-50 rounded-2xl p-4 grid grid-cols-2 gap-x-4 gap-y-3">
               <div className="col-span-2">
-                <p className="font-body text-[10px] text-mist uppercase tracking-wider">Región</p>
-                <p className="font-body font-semibold text-sm text-ink mt-0.5">
+                <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">Región</p>
+                <p className="font-body font-semibold text-sm text-dark mt-0.5">
                   {order.shipping_region || order.customer_region || "—"}
                 </p>
               </div>
               {order.shipping_zone && (
                 <div>
-                  <p className="font-body text-[10px] text-mist uppercase tracking-wider">Zona</p>
-                  <p className="font-body font-semibold text-sm text-ink mt-0.5">{order.shipping_zone}</p>
+                  <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">Zona</p>
+                  <p className="font-body font-semibold text-sm text-dark mt-0.5">{order.shipping_zone}</p>
                 </div>
               )}
               <div>
-                <p className="font-body text-[10px] text-mist uppercase tracking-wider">Costo de envío</p>
+                <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">Costo de envío</p>
                 <p className="font-body font-semibold text-sm mt-0.5">
                   {order.shipping_is_free
-                    ? <span className="text-teal-dark">GRATIS</span>
-                    : <span className="text-ink">{fmtCLP(order.shipping_cost)}</span>
+                    ? <span className="text-primary">GRATIS</span>
+                    : <span className="text-dark">{fmtCLP(order.shipping_cost)}</span>
                   }
                 </p>
               </div>
@@ -182,26 +182,26 @@ function OrderDetail({ order, onClose, onRequestChange }) {
 
           {/* ── Sección: Productos comprados ── */}
           <div>
-            <p className="font-body text-[10px] font-bold text-mist uppercase tracking-[.12em] mb-3">
+            <p className="font-body text-[10px] font-bold text-neutral-500 uppercase tracking-[.12em] mb-3">
               Productos ({itemsTotal} {itemsTotal === 1 ? "unidad" : "unidades"})
             </p>
             <div className="flex flex-col gap-3">
               {(order.items ?? []).map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 bg-sand rounded-xl p-3">
+                <div key={idx} className="flex items-center gap-3 bg-neutral-50 rounded-xl p-3">
                   {item.image && (
-                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-white flex-shrink-0 border border-dust/40">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-white flex-shrink-0 border border-neutral-200/40">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="font-body font-semibold text-sm text-ink line-clamp-2">
+                    <p className="font-body font-semibold text-sm text-dark line-clamp-2">
                       {item.name}
                     </p>
-                    <p className="font-body text-xs text-mist mt-0.5">
+                    <p className="font-body text-xs text-neutral-500 mt-0.5">
                       {fmtCLP(item.price)} × {item.qty} {item.qty === 1 ? "unidad" : "unidades"}
                     </p>
                   </div>
-                  <p className="font-body font-bold text-sm text-ink flex-shrink-0">
+                  <p className="font-body font-bold text-sm text-dark flex-shrink-0">
                     {fmtCLP(item.price * item.qty)}
                   </p>
                 </div>
@@ -209,23 +209,23 @@ function OrderDetail({ order, onClose, onRequestChange }) {
             </div>
 
             {/* Desglose financiero */}
-            <div className="mt-4 border-t border-dust pt-4 flex flex-col gap-2">
+            <div className="mt-4 border-t border-neutral-200 pt-4 flex flex-col gap-2">
               <div className="flex justify-between text-sm font-body">
-                <span className="text-mist">Subtotal</span>
-                <span className="text-ink font-semibold">{fmtCLP(order.subtotal)}</span>
+                <span className="text-neutral-500">Subtotal</span>
+                <span className="text-dark font-semibold">{fmtCLP(order.subtotal)}</span>
               </div>
               <div className="flex justify-between text-sm font-body">
-                <span className="text-mist">
+                <span className="text-neutral-500">
                   Envío{order.shipping_zone ? ` — ${order.shipping_zone}` : ""}
                 </span>
                 {order.shipping_is_free
-                  ? <span className="font-semibold text-teal-dark">GRATIS</span>
-                  : <span className="font-semibold text-ink">{fmtCLP(order.shipping_cost)}</span>
+                  ? <span className="font-semibold text-primary">GRATIS</span>
+                  : <span className="font-semibold text-dark">{fmtCLP(order.shipping_cost)}</span>
                 }
               </div>
-              <div className="flex justify-between pt-2 mt-1 border-t border-dust">
-                <span className="font-body font-bold text-base text-ink">Total</span>
-                <span className="font-display font-black text-2xl text-ink">{fmtCLP(order.total)}</span>
+              <div className="flex justify-between pt-2 mt-1 border-t border-neutral-200">
+                <span className="font-body font-bold text-base text-dark">Total</span>
+                <span className="font-display font-black text-2xl text-dark">{fmtCLP(order.total)}</span>
               </div>
             </div>
           </div>
@@ -233,20 +233,20 @@ function OrderDetail({ order, onClose, onRequestChange }) {
           {/* ── Sección: Fecha de compra ── */}
           <div className="flex gap-6 text-sm font-body">
             <div>
-              <p className="font-body text-[10px] text-mist uppercase tracking-wider">Fecha de compra</p>
-              <p className="font-body font-semibold text-ink mt-0.5">{fmtFechaHora(order.created_at)}</p>
+              <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">Fecha de compra</p>
+              <p className="font-body font-semibold text-dark mt-0.5">{fmtFechaHora(order.created_at)}</p>
             </div>
             {order.updated_at && order.updated_at !== order.created_at && (
               <div>
-                <p className="font-body text-[10px] text-mist uppercase tracking-wider">Última actualización</p>
-                <p className="font-body font-semibold text-ink mt-0.5">{fmtFechaHora(order.updated_at)}</p>
+                <p className="font-body text-[10px] text-neutral-500 uppercase tracking-wider">Última actualización</p>
+                <p className="font-body font-semibold text-dark mt-0.5">{fmtFechaHora(order.updated_at)}</p>
               </div>
             )}
           </div>
 
           {/* ── Sección: Cambiar estado ── */}
           <div>
-            <p className="font-body text-[10px] font-bold text-mist uppercase tracking-[.12em] mb-3">
+            <p className="font-body text-[10px] font-bold text-neutral-500 uppercase tracking-[.12em] mb-3">
               Cambiar estado
             </p>
             <select
@@ -255,7 +255,7 @@ function OrderDetail({ order, onClose, onRequestChange }) {
                 const newStatus = e.target.value
                 if (newStatus !== order.status) onRequestChange(order.id, newStatus)
               }}
-              className="w-full bg-white border-2 rounded-xl px-4 py-3 text-sm font-body font-semibold outline-none cursor-pointer focus:ring-2 focus:ring-teal/20 transition-all"
+              className="w-full bg-white border-2 rounded-xl px-4 py-3 text-sm font-body font-semibold outline-none cursor-pointer focus:ring-2 focus:ring-primary/20 transition-all"
               style={{
                 borderColor: ORDER_STATUSES[order.status]?.colors.border ?? "#ddd0d3",
                 color:       ORDER_STATUSES[order.status]?.colors.text   ?? "#1a2e2b",
@@ -267,14 +267,14 @@ function OrderDetail({ order, onClose, onRequestChange }) {
                 </option>
               ))}
             </select>
-            <p className="font-body text-xs text-mist mt-2">
+            <p className="font-body text-xs text-neutral-500 mt-2">
               Selecciona cualquier estado de la lista — no es necesario seguir un orden.
             </p>
           </div>
 
           {/* ── Sección: Historial ── */}
           <div>
-            <p className="font-body text-[10px] font-bold text-mist uppercase tracking-[.12em] mb-3">
+            <p className="font-body text-[10px] font-bold text-neutral-500 uppercase tracking-[.12em] mb-3">
               Historial de estados
             </p>
             <StatusTimeline history={order.status_history ?? []} />
@@ -294,23 +294,23 @@ function ConfirmModal({ change, orders, onConfirm, onCancel }) {
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onCancel} />
-      <div className="relative bg-white rounded-3xl border border-dust shadow-xl p-6 sm:p-8 w-full max-w-md">
-        <h3 className="font-display font-bold text-lg text-ink mb-1">
+      <div className="absolute inset-0 bg-dark/50 backdrop-blur-sm" onClick={onCancel} />
+      <div className="relative bg-white rounded-3xl border border-neutral-200 shadow-xl p-6 sm:p-8 w-full max-w-md">
+        <h3 className="font-display font-bold text-lg text-dark mb-1">
           Confirmar cambio de estado
         </h3>
-        <p className="font-body text-sm text-mist mb-5">Pedido {change.orderId}</p>
+        <p className="font-body text-sm text-neutral-500 mb-5">Pedido {change.orderId}</p>
 
         <div className="flex items-center gap-3 mb-5">
           <StatusBadge statusKey={order?.status} size="md" />
-          <span className="text-mist font-bold text-lg">→</span>
+          <span className="text-neutral-500 font-bold text-lg">→</span>
           <StatusBadge statusKey={change.newStatus} size="md" />
         </div>
 
         <div className="mb-5">
-          <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+          <label className="font-body text-sm font-semibold text-dark mb-1.5 block">
             Nota interna{" "}
-            <span className="text-mist font-normal">(opcional — se guarda en el historial)</span>
+            <span className="text-neutral-500 font-normal">(opcional — se guarda en el historial)</span>
           </label>
           <input
             type="text"
@@ -318,14 +318,14 @@ function ConfirmModal({ change, orders, onConfirm, onCancel }) {
             value={note}
             onChange={(e) => setNote(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && onConfirm(note)}
-            className="w-full bg-white border border-dust rounded-xl px-4 py-3 text-sm font-body text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-all placeholder:text-mist"
+            className="w-full bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm font-body text-dark outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-neutral-500"
           />
         </div>
 
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 border border-dust rounded-full py-3 font-body font-semibold text-sm text-mist hover:text-ink hover:border-ink transition-all"
+            className="flex-1 border border-neutral-200 rounded-full py-3 font-body font-semibold text-sm text-neutral-500 hover:text-dark hover:border-dark transition-all"
           >
             Cancelar
           </button>
@@ -449,9 +449,9 @@ export default function AdminOrders() {
 
       {/* Error de conexión */}
       {error && (
-        <div className="bg-rose-blush border border-rose-berry/30 rounded-2xl px-5 py-4 mb-6">
-          <p className="font-body font-semibold text-sm text-rose-berry">{error}</p>
-          <button onClick={loadOrders} className="font-body text-xs text-rose-berry underline mt-1">
+        <div className="bg-red-50 border border-red-200/30 rounded-2xl px-5 py-4 mb-6">
+          <p className="font-body font-semibold text-sm text-red-500">{error}</p>
+          <button onClick={loadOrders} className="font-body text-xs text-red-500 underline mt-1">
             Reintentar
           </button>
         </div>
@@ -463,14 +463,14 @@ export default function AdminOrders() {
           onClick={() => setFilterStatus("all")}
           className={`col-span-1 rounded-2xl border p-3 text-left transition-all ${
             filterStatus === "all"
-              ? "bg-ink text-white border-ink shadow-card"
-              : "bg-white border-dust hover:border-ink/30"
+              ? "bg-dark text-white border-dark shadow-card"
+              : "bg-white border-neutral-200 hover:border-dark/30"
           }`}
         >
-          <p className={`font-body text-[10px] uppercase tracking-wider mb-1 ${filterStatus === "all" ? "text-white/60" : "text-mist"}`}>
+          <p className={`font-body text-[10px] uppercase tracking-wider mb-1 ${filterStatus === "all" ? "text-white/60" : "text-neutral-500"}`}>
             Total
           </p>
-          <p className={`font-display font-black text-xl ${filterStatus === "all" ? "text-white" : "text-ink"}`}>
+          <p className={`font-display font-black text-xl ${filterStatus === "all" ? "text-white" : "text-dark"}`}>
             {orders.length}
           </p>
         </button>
@@ -514,13 +514,13 @@ export default function AdminOrders() {
           placeholder="Buscar por N° pedido, nombre, correo, RUT, teléfono o comuna..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="flex-1 bg-white border border-dust rounded-2xl px-4 py-3 text-sm font-body text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-all placeholder:text-mist"
+          className="flex-1 bg-white border border-neutral-200 rounded-2xl px-4 py-3 text-sm font-body text-dark outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-neutral-500"
         />
         <div className="flex gap-2">
           {(search || filterStatus !== "all") && (
             <button
               onClick={() => { setSearch(""); setFilterStatus("all") }}
-              className="font-body text-sm font-semibold text-mist hover:text-ink px-4 py-2 rounded-2xl border border-dust hover:border-ink/30 bg-white transition-all flex-shrink-0"
+              className="font-body text-sm font-semibold text-neutral-500 hover:text-dark px-4 py-2 rounded-2xl border border-neutral-200 hover:border-dark/30 bg-white transition-all flex-shrink-0"
             >
               Limpiar filtros
             </button>
@@ -528,7 +528,7 @@ export default function AdminOrders() {
           <button
             onClick={loadOrders}
             disabled={loading}
-            className="font-body text-sm font-semibold text-mist hover:text-ink px-4 py-2 rounded-2xl border border-dust hover:border-ink/30 bg-white transition-all flex-shrink-0 disabled:opacity-50"
+            className="font-body text-sm font-semibold text-neutral-500 hover:text-dark px-4 py-2 rounded-2xl border border-neutral-200 hover:border-dark/30 bg-white transition-all flex-shrink-0 disabled:opacity-50"
           >
             {loading ? "..." : "Actualizar"}
           </button>
@@ -537,13 +537,13 @@ export default function AdminOrders() {
 
       {/* Lista de pedidos */}
       {loading ? (
-        <div className="bg-white rounded-3xl border border-dust p-16 text-center">
-          <p className="font-body text-sm text-mist">Cargando pedidos desde Supabase...</p>
+        <div className="bg-white rounded-3xl border border-neutral-200 p-16 text-center">
+          <p className="font-body text-sm text-neutral-500">Cargando pedidos desde Supabase...</p>
         </div>
       ) : filtered.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-dust p-16 text-center">
-          <p className="font-display font-bold text-xl text-ink mb-2">Sin resultados</p>
-          <p className="font-body text-sm text-mist">
+        <div className="bg-white rounded-3xl border border-neutral-200 p-16 text-center">
+          <p className="font-display font-bold text-xl text-dark mb-2">Sin resultados</p>
+          <p className="font-body text-sm text-neutral-500">
             No hay pedidos que coincidan con los filtros aplicados.
           </p>
         </div>
@@ -556,7 +556,7 @@ export default function AdminOrders() {
             return (
               <div
                 key={order.id}
-                className="bg-white rounded-2xl border border-dust shadow-card hover:shadow-md transition-all overflow-hidden"
+                className="bg-white rounded-2xl border border-neutral-200 shadow-card hover:shadow-md transition-all overflow-hidden"
               >
                 <div className="flex">
                   {/* Franja de color del estado */}
@@ -570,36 +570,36 @@ export default function AdminOrders() {
                     <div className="flex flex-wrap items-start gap-3 justify-between">
                       <div className="flex flex-col gap-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-display font-bold text-sm text-ink">{order.id}</span>
+                          <span className="font-display font-bold text-sm text-dark">{order.id}</span>
                           <StatusBadge statusKey={order.status} />
                         </div>
                         {/* Nombre y correo del cliente */}
-                        <p className="font-body font-semibold text-sm text-ink truncate">
+                        <p className="font-body font-semibold text-sm text-dark truncate">
                           {order.customer_name || "—"}
                         </p>
-                        <p className="font-body text-xs text-mist truncate">
+                        <p className="font-body text-xs text-neutral-500 truncate">
                           {order.customer_email || ""}
                           {order.customer_phone ? ` · ${order.customer_phone}` : ""}
                         </p>
                         {/* Dirección resumida */}
-                        <p className="font-body text-xs text-mist">
+                        <p className="font-body text-xs text-neutral-500">
                           {[order.customer_address, order.customer_comuna, order.customer_region]
                             .filter(Boolean).join(" · ")}
                         </p>
-                        <p className="font-body text-xs text-mist/70">
+                        <p className="font-body text-xs text-neutral-500/70">
                           {fmtFecha(order.created_at)}
                         </p>
                       </div>
 
                       <div className="text-right flex-shrink-0">
-                        <p className="font-display font-black text-xl text-ink">
+                        <p className="font-display font-black text-xl text-dark">
                           {fmtCLP(order.total)}
                         </p>
-                        <p className="font-body text-xs text-mist">
+                        <p className="font-body text-xs text-neutral-500">
                           {nItems} {nItems === 1 ? "unidad" : "unidades"}
                         </p>
                         {order.customer_rut && (
-                          <p className="font-body text-xs text-mist/70 mt-0.5">
+                          <p className="font-body text-xs text-neutral-500/70 mt-0.5">
                             {order.customer_rut}
                           </p>
                         )}
@@ -612,7 +612,7 @@ export default function AdminOrders() {
                         {order.items.slice(0, 3).map((item, idx) => (
                           <div
                             key={idx}
-                            className="w-8 h-8 rounded-lg overflow-hidden bg-sand border border-dust/40 flex-shrink-0"
+                            className="w-8 h-8 rounded-lg overflow-hidden bg-neutral-50 border border-neutral-200/40 flex-shrink-0"
                             title={item.name}
                           >
                             {item.image && (
@@ -621,11 +621,11 @@ export default function AdminOrders() {
                           </div>
                         ))}
                         {order.items.length > 3 && (
-                          <span className="font-body text-xs text-mist">
+                          <span className="font-body text-xs text-neutral-500">
                             +{order.items.length - 3} más
                           </span>
                         )}
-                        <span className="font-body text-xs text-mist ml-1">
+                        <span className="font-body text-xs text-neutral-500 ml-1">
                           {order.items.slice(0, 3).map((i) => `${i.name} ×${i.qty}`).join(", ")}
                           {order.items.length > 3 ? "..." : ""}
                         </span>
@@ -633,11 +633,11 @@ export default function AdminOrders() {
                     )}
 
                     {/* Acciones */}
-                    <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-dust/60">
+                    <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-neutral-200/60">
                       {/* Ver detalle */}
                       <button
                         onClick={() => setSelectedId(order.id)}
-                        className="font-body font-semibold text-xs text-mist hover:text-ink px-3 py-1.5 rounded-full border border-dust hover:border-ink/30 transition-all"
+                        className="font-body font-semibold text-xs text-neutral-500 hover:text-dark px-3 py-1.5 rounded-full border border-neutral-200 hover:border-dark/30 transition-all"
                       >
                         Ver detalle
                       </button>
@@ -673,7 +673,7 @@ export default function AdminOrders() {
         </div>
       )}
 
-      <p className="font-body text-xs text-mist text-center mt-6">
+      <p className="font-body text-xs text-neutral-500 text-center mt-6">
         Mostrando {filtered.length} de {orders.length} pedidos
       </p>
 

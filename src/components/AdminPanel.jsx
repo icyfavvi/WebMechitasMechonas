@@ -16,21 +16,19 @@ export default function AdminPanel({ onLogout, onNavigate }) {
   ]
 
   return (
-    <div className="min-h-screen bg-sand font-body">
+    <div className="min-h-screen bg-neutral-50 font-body">
       {/* Encabezado */}
-      <div className="bg-ink text-white">
+      <div className="bg-dark text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-5 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-4">
   <button
     onClick={() => onNavigate("shop")}
-    className="hover:opacity-80 transition-opacity"
+    className="hover:opacity-80 transition-opacity text-left"
     title="Volver a la tienda"
   >
-    <img
-      src="/image_11cb63.png"
-      alt="Mechitas Mechonas"
-      className="h-8 w-auto object-contain opacity-90"
-    />
+    <h2 className="font-display font-black text-2xl text-white leading-tight">
+      Mechitas<br />Mechonas
+    </h2>
   </button>
 
   <div className="h-6 w-px bg-white/20" />

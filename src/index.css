@@ -4,26 +4,25 @@
 
 @layer base {
   :root {
-    --teal: #5DBFB0;
-    --teal-dark: #3d9e8f;
-    --teal-light: #a8ded7;
-    --teal-pale: #e4f7f5;
-    --rose: #f29eab;
-    --rose-berry: #9b4f60;
-    --rose-blush: #fde8ec;
-    --gold: #f5c842;
-    --sand: #fdf8f2;
-    --ink: #1a2e2b;
+    --primary: #E29598;
+    --primary-dark: #C87679;
+    --primary-light: #F0A9AC;
+    --primary-pale: #FDEAEB;
+    --dark: #6A5C5C;
+    --neutral-50: #FDF8F5;
+    --neutral-100: #F3EBE1;
+    --neutral-200: #E6DCD1;
+    --neutral-500: #8C7C7C;
   }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Quicksand', sans-serif;
-    background: #fdf8f2;
-    color: #1a2e2b;
+    font-family: 'Nunito', system-ui, sans-serif;
+    background: #FFFFFF;
+    color: #6A5C5C;
     overflow-x: hidden;
   }
   * { box-sizing: border-box; }
-  ::selection { background: #fde8ec; color: #9b4f60; }
+  ::selection { background: #FDEAEB; color: #E29598; }
 }
 
 @layer utilities {

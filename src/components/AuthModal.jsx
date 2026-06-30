@@ -74,23 +74,21 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
     )
   }
 
-  const inp = `w-full bg-white border border-dust rounded-xl px-4 py-3 text-sm font-body text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-all placeholder:text-mist`
+  const inp = `w-full bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm font-body text-dark outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-neutral-500`
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-dark/60 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative bg-white rounded-3xl border border-dust shadow-2xl w-full max-w-sm overflow-hidden">
+      <div className="relative bg-white rounded-3xl border border-neutral-200 shadow-2xl w-full max-w-sm overflow-hidden">
 
         {/* Cabecera */}
         <div className="px-8 pt-8 pb-0 text-center">
-          <img
-            src="/image_11cb63.png"
-            alt="Mechitas Mechonas"
-            className="h-10 w-auto object-contain mx-auto mb-5"
-          />
+          <h2 className="font-display font-black text-2xl text-dark mb-5 leading-tight">
+            Mechitas<br />Mechonas
+          </h2>
           {/* Pestañas */}
-          <div className="flex border-b border-dust mb-6">
+          <div className="flex border-b border-neutral-200 mb-6">
             {[
               { key: "login",    label: "Iniciar sesión" },
               { key: "register", label: "Crear cuenta" },
@@ -98,10 +96,10 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
               <button
                 key={t.key}
                 onClick={() => switchTab(t.key)}
-                className={`flex-1 pb-3 font-body font-semibold text-sm transition-all ${
+                className={`flex-1 pb-3 font-body font-bold text-sm transition-all ${
                   tab === t.key
-                    ? "text-ink border-b-2 border-ink -mb-px"
-                    : "text-mist hover:text-ink"
+                    ? "text-dark border-b-2 border-dark -mb-px"
+                    : "text-neutral-500 hover:text-dark"
                 }`}
               >
                 {t.label}
@@ -114,13 +112,13 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
 
           {/* Mensajes */}
           {error && (
-            <div className="bg-rose-blush border border-rose-berry/30 rounded-xl px-4 py-3">
-              <p className="font-body text-xs text-rose-berry font-semibold">{error}</p>
+            <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+              <p className="font-body text-xs text-red-500 font-bold">{error}</p>
             </div>
           )}
           {success && (
-            <div className="bg-teal-pale border border-teal/30 rounded-xl px-4 py-3">
-              <p className="font-body text-xs text-teal-dark font-semibold">{success}</p>
+            <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+              <p className="font-body text-xs text-green-600 font-bold">{success}</p>
             </div>
           )}
 
@@ -128,7 +126,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
           {tab === "login" && (
             <>
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Correo electrónico
                 </label>
                 <input
@@ -142,7 +140,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
                 />
               </div>
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Contraseña
                 </label>
                 <input
@@ -158,13 +156,13 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
               <button
                 onClick={handleLogin}
                 disabled={loading}
-                className="w-full bg-ink hover:bg-ink/90 disabled:opacity-60 text-white font-bold rounded-full py-3.5 transition-all text-sm mt-1"
+                className="w-full bg-primary hover:bg-primary-dark disabled:opacity-60 text-white font-bold rounded-full py-3.5 transition-all text-sm mt-1 shadow-primary"
               >
                 {loading ? "Ingresando..." : "Ingresar"}
               </button>
               <button
                 onClick={() => switchTab("register")}
-                className="text-center font-body text-sm text-mist hover:text-ink transition-colors"
+                className="text-center font-body text-sm text-neutral-500 hover:text-primary transition-colors font-bold"
               >
                 ¿No tienes cuenta? Crea una aquí
               </button>
@@ -175,7 +173,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
           {tab === "register" && (
             <>
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Nombre completo
                 </label>
                 <input
@@ -188,7 +186,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
                 />
               </div>
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Correo electrónico
                 </label>
                 <input
@@ -201,7 +199,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
                 />
               </div>
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Contraseña
                 </label>
                 <input
@@ -214,7 +212,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
                 />
               </div>
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Confirmar contraseña
                 </label>
                 <input
@@ -230,13 +228,13 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
               <button
                 onClick={handleRegister}
                 disabled={loading}
-                className="w-full bg-ink hover:bg-ink/90 disabled:opacity-60 text-white font-bold rounded-full py-3.5 transition-all text-sm mt-1"
+                className="w-full bg-primary hover:bg-primary-dark disabled:opacity-60 text-white font-bold rounded-full py-3.5 transition-all text-sm mt-1 shadow-primary"
               >
                 {loading ? "Creando cuenta..." : "Crear cuenta"}
               </button>
               <button
                 onClick={() => switchTab("login")}
-                className="text-center font-body text-sm text-mist hover:text-ink transition-colors"
+                className="text-center font-body text-sm text-neutral-500 hover:text-primary transition-colors font-bold"
               >
                 ¿Ya tienes cuenta? Inicia sesión aquí
               </button>

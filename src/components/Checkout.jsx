@@ -105,16 +105,16 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
   const inp = (field) =>
     `w-full bg-white border ${
-      errors[field] ? "border-rose-berry" : "border-dust"
-    } rounded-xl px-4 py-3 text-sm font-body text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-all placeholder:text-mist`
+      errors[field] ? "border-red-400 focus:ring-red-100" : "border-neutral-200"
+    } rounded-xl px-4 py-3 text-sm font-body text-dark outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-neutral-500`
 
   const Err = ({ field }) =>
     errors[field] ? (
-      <p className="text-rose-berry text-xs mt-1 font-semibold">{errors[field]}</p>
+      <p className="text-red-500 text-xs mt-1 font-semibold">{errors[field]}</p>
     ) : null
 
   return (
-    <section className="bg-sand min-h-screen py-10 sm:py-16">
+    <section className="bg-neutral-50 min-h-screen py-10 sm:py-16">
       <div className="max-w-2xl mx-auto px-4 sm:px-6">
 
         {/* Cabecera y pasos */}
@@ -122,11 +122,11 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
           <div className="mb-8">
             <button
               onClick={() => (step === 2 ? setStep(1) : onBack())}
-              className="font-body font-semibold text-sm text-teal-dark hover:text-teal transition-colors mb-4 inline-block"
+              className="font-body font-bold text-sm text-primary hover:text-primary-dark transition-colors mb-4 inline-block"
             >
               {step === 2 ? "Volver al paso anterior" : "Volver al catálogo"}
             </button>
-            <h1 className="font-display font-black text-3xl sm:text-4xl text-ink">
+            <h1 className="font-display font-black text-3xl sm:text-4xl text-dark">
               Finalizar Compra
             </h1>
             <div className="flex items-center gap-4 mt-4">
@@ -135,16 +135,16 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
                 { n: 2, label: "Resumen y Pago" },
               ].map(({ n, label }, i) => (
                 <div key={n} className="flex items-center gap-2">
-                  {i > 0 && <div className="w-8 h-px bg-dust" />}
-                  <div className={`flex items-center gap-2 ${step === n ? "text-ink" : "text-mist"}`}>
+                  {i > 0 && <div className="w-8 h-px bg-neutral-200" />}
+                  <div className={`flex items-center gap-2 ${step === n ? "text-dark" : "text-neutral-500"}`}>
                     <span
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                        step > n ? "bg-teal text-white" : step === n ? "bg-ink text-white" : "bg-dust text-mist"
+                        step > n ? "bg-primary text-white" : step === n ? "bg-dark text-white" : "bg-neutral-200 text-neutral-500"
                       }`}
                     >
                       {step > n ? "OK" : n}
                     </span>
-                    <span className="font-body text-sm font-semibold">{label}</span>
+                    <span className="font-body text-sm font-bold">{label}</span>
                   </div>
                 </div>
               ))}
@@ -154,13 +154,13 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
         {/* ════ PASO 1 — Datos del cliente ════ */}
         {step === 1 && (
-          <div className="bg-white rounded-3xl border border-dust p-6 sm:p-8 shadow-card">
-            <h2 className="font-display font-bold text-xl text-ink mb-6">Datos del Cliente</h2>
+          <div className="bg-white rounded-3xl border border-neutral-200 p-6 sm:p-8 shadow-card">
+            <h2 className="font-display font-bold text-xl text-dark mb-6">Datos del Cliente</h2>
             <div className="flex flex-col gap-5">
 
               {/* Nombre */}
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Nombre completo
                 </label>
                 <input type="text" placeholder="Ingresa tu nombre completo"
@@ -171,7 +171,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
               {/* Email */}
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Correo electrónico
                 </label>
                 <input type="email" placeholder="tu@correo.com"
@@ -184,7 +184,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
               {/* RUT y Teléfono en fila */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                  <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                     RUT
                   </label>
                   <input type="text" placeholder="12.345.678-9"
@@ -193,8 +193,8 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
                   <Err field="rut" />
                 </div>
                 <div>
-                  <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
-                    Teléfono <span className="text-mist font-normal">(opcional)</span>
+                  <label className="font-body text-sm font-bold text-dark mb-1.5 block">
+                    Teléfono <span className="text-neutral-500 font-normal">(opcional)</span>
                   </label>
                   <input type="tel" placeholder="+56 9 1234 5678"
                     value={form.phone} onChange={(e) => setField("phone", e.target.value)}
@@ -204,7 +204,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
               {/* Dirección */}
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Dirección
                 </label>
                 <input type="text" placeholder="Calle, número, depto."
@@ -215,7 +215,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
               {/* Región */}
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Región
                 </label>
                 <select value={form.region}
@@ -231,23 +231,23 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
                 {/* Preview del costo de envío */}
                 {form.region && shippingRate && (
-                  <div className={`mt-2 rounded-xl px-4 py-3 text-sm font-body flex items-center justify-between gap-2 ${
+                  <div className={`mt-2 rounded-xl px-4 py-3 text-sm font-body flex items-center justify-between gap-2 border ${
                     isFree
-                      ? "bg-teal-pale border border-teal/30 text-teal-dark"
-                      : "bg-sand border border-dust text-mist"
+                      ? "bg-primary-pale border-primary/30 text-primary-dark"
+                      : "bg-neutral-50 border-neutral-200 text-neutral-500"
                   }`}>
                     <span>
                       {isFree
                         ? "Envío gratis para esta región"
                         : `Costo de envío: $${shippingCost.toLocaleString("es-CL")}`}
                     </span>
-                    <span className="text-xs font-semibold opacity-70 flex-shrink-0">
+                    <span className="text-xs font-bold opacity-70 flex-shrink-0">
                       {shippingRate.days}
                     </span>
                   </div>
                 )}
                 {form.region && shippingRate && !isFree && shippingRate.freeAbove && (
-                  <p className="text-xs text-mist mt-1.5 font-body">
+                  <p className="text-xs text-neutral-500 mt-1.5 font-body">
                     Envío gratis al comprar ${shippingRate.freeAbove.toLocaleString("es-CL")} o más.
                   </p>
                 )}
@@ -255,7 +255,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
               {/* Comuna */}
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
                   Ciudad / Comuna
                 </label>
                 <input type="text" placeholder="Ingresa tu comuna"
@@ -266,8 +266,8 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
 
               {/* Observaciones */}
               <div>
-                <label className="font-body text-sm font-semibold text-ink mb-1.5 block">
-                  Observaciones <span className="text-mist font-normal">(opcional)</span>
+                <label className="font-body text-sm font-bold text-dark mb-1.5 block">
+                  Observaciones <span className="text-neutral-500 font-normal">(opcional)</span>
                 </label>
                 <textarea
                   placeholder="Instrucciones especiales, referencia de dirección, etc."
@@ -279,7 +279,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
               </div>
 
               <button onClick={handleNext} id="checkout-next"
-                className="w-full bg-ink hover:bg-ink/90 text-white font-bold rounded-full py-4 transition-all shadow-md mt-2">
+                className="w-full bg-dark hover:bg-neutral-800 text-white font-bold rounded-full py-4 transition-all shadow-md mt-2">
                 Siguiente
               </button>
             </div>
@@ -291,46 +291,46 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
           <div className="flex flex-col gap-6">
 
             {/* Productos */}
-            <div className="bg-white rounded-3xl border border-dust p-6 sm:p-8 shadow-card">
-              <h2 className="font-display font-bold text-xl text-ink mb-6">Resumen del Pedido</h2>
+            <div className="bg-white rounded-3xl border border-neutral-200 p-6 sm:p-8 shadow-card">
+              <h2 className="font-display font-bold text-xl text-dark mb-6">Resumen del Pedido</h2>
               <div className="flex flex-col gap-4 mb-6">
                 {items.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 pb-4 border-b border-dust/50 last:border-0 last:pb-0">
-                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-sand flex-shrink-0 border border-dust/30">
+                  <div key={item.id} className="flex items-center gap-4 pb-4 border-b border-neutral-200 last:border-0 last:pb-0">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0 border border-neutral-200">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-body font-semibold text-sm text-ink line-clamp-2">{item.name}</p>
-                      <p className="font-body text-xs text-mist mt-0.5">Cantidad: {item.qty}</p>
+                      <p className="font-body font-bold text-sm text-dark line-clamp-2">{item.name}</p>
+                      <p className="font-body text-xs text-neutral-500 mt-0.5">Cantidad: {item.qty}</p>
                     </div>
-                    <p className="font-body font-bold text-sm text-ink flex-shrink-0">
+                    <p className="font-body font-bold text-sm text-dark flex-shrink-0">
                       ${(item.price * item.qty).toLocaleString("es-CL")}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="border-t border-dust pt-4 flex flex-col gap-2.5">
+              <div className="border-t border-neutral-200 pt-4 flex flex-col gap-2.5">
                 <div className="flex justify-between items-center">
-                  <span className="font-body text-mist text-sm">Subtotal</span>
-                  <span className="font-body font-semibold text-sm text-ink">
+                  <span className="font-body text-neutral-500 text-sm">Subtotal</span>
+                  <span className="font-body font-bold text-sm text-dark">
                     ${total.toLocaleString("es-CL")}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-body text-mist text-sm">
+                  <span className="font-body text-neutral-500 text-sm">
                     Envío{shippingRate ? ` — ${shippingRate.zone}` : ""}
                   </span>
                   {isFree
-                    ? <span className="font-body font-semibold text-sm text-teal-dark">GRATIS</span>
-                    : <span className="font-body font-semibold text-sm text-ink">
+                    ? <span className="font-body font-bold text-sm text-primary">GRATIS</span>
+                    : <span className="font-body font-bold text-sm text-dark">
                         ${shippingCost.toLocaleString("es-CL")}
                       </span>
                   }
                 </div>
-                <div className="flex justify-between items-center pt-3 border-t border-dust mt-1">
-                  <span className="font-body font-bold text-base text-ink">Total a pagar</span>
-                  <span className="font-display font-black text-2xl text-ink">
+                <div className="flex justify-between items-center pt-3 border-t border-neutral-200 mt-1">
+                  <span className="font-body font-bold text-base text-dark">Total a pagar</span>
+                  <span className="font-display font-black text-2xl text-primary">
                     ${grandTotal.toLocaleString("es-CL")}
                   </span>
                 </div>
@@ -338,36 +338,36 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
             </div>
 
             {/* Info de envío */}
-            <div className="bg-white rounded-3xl border border-dust p-6 sm:p-8 shadow-card">
-              <h3 className="font-display font-bold text-lg text-ink mb-4">Información de Envío</h3>
+            <div className="bg-white rounded-3xl border border-neutral-200 p-6 sm:p-8 shadow-card">
+              <h3 className="font-display font-bold text-lg text-dark mb-4">Información de Envío</h3>
               {shippingRate ? (
                 <div className="flex flex-col gap-3">
                   <div>
-                    <p className="font-body font-semibold text-sm text-ink">{shippingRate.region}</p>
-                    <p className="font-body text-xs text-mist mt-0.5">Zona {shippingRate.zone}</p>
+                    <p className="font-body font-bold text-sm text-dark">{shippingRate.region}</p>
+                    <p className="font-body text-xs text-neutral-500 mt-0.5">Zona {shippingRate.zone}</p>
                   </div>
-                  <p className="font-body text-sm text-ink">
-                    Entrega estimada: <span className="font-semibold">{shippingRate.days}</span>
+                  <p className="font-body text-sm text-dark">
+                    Entrega estimada: <span className="font-bold">{shippingRate.days}</span>
                   </p>
-                  <div className={`rounded-xl px-4 py-3 flex items-center justify-between ${
-                    isFree ? "bg-teal-pale border border-teal/30" : "bg-sand border border-dust"
+                  <div className={`rounded-xl px-4 py-3 flex items-center justify-between border ${
+                    isFree ? "bg-primary-pale border-primary/30" : "bg-neutral-50 border-neutral-200"
                   }`}>
-                    <span className="font-body text-sm font-semibold text-ink">
+                    <span className="font-body text-sm font-bold text-dark">
                       {isFree ? "Envío gratis aplicado" : "Costo de envío"}
                     </span>
-                    <span className={`font-display font-black text-lg ${isFree ? "text-teal-dark" : "text-ink"}`}>
+                    <span className={`font-display font-black text-lg ${isFree ? "text-primary" : "text-dark"}`}>
                       {isFree ? "GRATIS" : `$${shippingCost.toLocaleString("es-CL")}`}
                     </span>
                   </div>
                 </div>
               ) : (
-                <p className="font-body text-sm text-mist">No se pudo calcular el envío.</p>
+                <p className="font-body text-sm text-neutral-500">No se pudo calcular el envío.</p>
               )}
             </div>
 
             {/* Datos del cliente — resumen */}
-            <div className="bg-white rounded-3xl border border-dust p-6 sm:p-8 shadow-card">
-              <h3 className="font-display font-bold text-lg text-ink mb-4">Datos del Cliente</h3>
+            <div className="bg-white rounded-3xl border border-neutral-200 p-6 sm:p-8 shadow-card">
+              <h3 className="font-display font-bold text-lg text-dark mb-4">Datos del Cliente</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   { l: "Nombre",   v: form.nombre },
@@ -380,16 +380,16 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
                   ...(form.observaciones ? [{ l: "Observaciones", v: form.observaciones }] : []),
                 ].map(({ l, v }) => (
                   <div key={l} className={l === "Dirección" || l === "Observaciones" ? "sm:col-span-2" : ""}>
-                    <p className="font-body text-xs text-mist uppercase tracking-wider">{l}</p>
-                    <p className="font-body font-semibold text-sm text-ink mt-0.5">{v}</p>
+                    <p className="font-body text-xs text-neutral-500 uppercase tracking-wider">{l}</p>
+                    <p className="font-body font-bold text-sm text-dark mt-0.5">{v}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {placeError && (
-              <div className="bg-rose-blush border border-rose-berry/30 rounded-2xl px-5 py-4">
-                <p className="font-body text-sm font-semibold text-rose-berry">{placeError}</p>
+              <div className="bg-red-50 border border-red-200 rounded-2xl px-5 py-4">
+                <p className="font-body text-sm font-bold text-red-500">{placeError}</p>
               </div>
             )}
 
@@ -397,7 +397,7 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
               onClick={handlePayment}
               disabled={placing}
               id="pay-webpay"
-              className="w-full bg-teal hover:bg-teal-dark disabled:opacity-60 text-white font-bold rounded-full py-4 transition-all shadow-teal text-base"
+              className="w-full bg-primary hover:bg-primary-dark text-white font-black py-5 rounded-full shadow-primary-lg hover:-translate-y-0.5 active:scale-95 disabled:opacity-60 transition-all text-base"
             >
               {placing
                 ? "Registrando pedido..."
@@ -409,63 +409,67 @@ export default function Checkout({ items, total, onBack, onPlaceOrder, user }) {
         {/* ════ PASO 3 — Confirmación ════ */}
         {step === 3 && (
           <div className="flex flex-col items-center text-center gap-6 py-8">
-            <div className="w-24 h-24 bg-teal-pale rounded-full flex items-center justify-center border-4 border-teal/30">
-              <div className="w-8 h-8 rounded-full bg-teal" />
+            <div className="w-24 h-24 bg-primary-pale rounded-full flex items-center justify-center border-4 border-primary/30">
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
             </div>
 
             <div>
-              <h1 className="font-display font-black text-3xl sm:text-4xl text-ink mb-2">
+              <h1 className="font-display font-black text-3xl sm:text-4xl text-dark mb-2">
                 ¡Pedido recibido!
               </h1>
-              <p className="font-body text-mist text-sm">
-                Gracias por tu compra, <strong className="text-ink">{form.nombre.split(" ")[0]}</strong>
+              <p className="font-body text-neutral-500 text-sm">
+                Gracias por tu compra, <strong className="text-dark">{form.nombre.split(" ")[0]}</strong>
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-dust p-6 sm:p-8 shadow-card w-full max-w-sm">
-              <p className="font-body text-xs text-mist uppercase tracking-wider mb-1">
+            <div className="bg-white rounded-3xl border border-neutral-200 p-6 sm:p-8 shadow-card w-full max-w-sm">
+              <p className="font-body text-xs text-neutral-500 uppercase tracking-wider mb-1">
                 Número de pedido
               </p>
-              <p className="font-display font-black text-2xl text-ink mb-4">{orderId}</p>
+              <p className="font-display font-black text-2xl text-dark mb-4">{orderId}</p>
 
               <div
                 className="flex items-center justify-center rounded-xl px-4 py-2.5 mb-4 border"
                 style={{ backgroundColor: "#fff8dc", borderColor: "#f5c842" }}
               >
-                <span className="font-body font-semibold text-sm" style={{ color: "#a07a10" }}>
+                <span className="font-body font-bold text-sm" style={{ color: "#a07a10" }}>
                   Pendiente de pago
                 </span>
               </div>
 
-              <p className="font-body text-xs text-mist leading-relaxed">
+              <p className="font-body text-xs text-neutral-500 leading-relaxed">
                 Verificaremos tu pago y actualizaremos el estado del pedido.
                 Te contactaremos al correo <strong>{form.email}</strong>.
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-dust p-5 shadow-card w-full max-w-sm text-left">
-              <p className="font-body text-xs text-mist uppercase tracking-wider mb-3">Resumen</p>
+            <div className="bg-white rounded-3xl border border-neutral-200 p-5 shadow-card w-full max-w-sm text-left">
+              <p className="font-body text-xs text-neutral-500 uppercase tracking-wider mb-3">Resumen</p>
               <div className="flex flex-col gap-1.5 text-sm font-body">
                 <div className="flex justify-between">
-                  <span className="text-mist">Dirección</span>
-                  <span className="text-ink font-semibold text-right max-w-[60%]">
+                  <span className="text-neutral-500">Dirección</span>
+                  <span className="text-dark font-bold text-right max-w-[60%]">
                     {form.direccion}, {form.comuna}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-mist">Región</span>
-                  <span className="text-ink font-semibold">{shippingRate?.region ?? form.region}</span>
+                  <span className="text-neutral-500">Región</span>
+                  <span className="text-dark font-bold">{shippingRate?.region ?? form.region}</span>
                 </div>
-                <div className="flex justify-between border-t border-dust pt-2 mt-1">
-                  <span className="text-ink font-bold">Total pagado</span>
-                  <span className="text-ink font-bold">${grandTotal.toLocaleString("es-CL")}</span>
+                <div className="flex justify-between border-t border-neutral-200 pt-2 mt-1">
+                  <span className="text-dark font-bold">Total pagado</span>
+                  <span className="text-dark font-bold">${grandTotal.toLocaleString("es-CL")}</span>
                 </div>
               </div>
             </div>
 
             <button
               onClick={onBack}
-              className="font-body font-semibold text-sm text-teal-dark hover:text-teal transition-colors mt-2"
+              className="font-body font-bold text-sm text-primary hover:text-primary-dark transition-colors mt-2"
             >
               Seguir comprando
             </button>

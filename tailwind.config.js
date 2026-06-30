@@ -4,30 +4,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        teal:  { DEFAULT:"#5DBFB0", dark:"#3d9e8f", light:"#a8ded7", pale:"#e4f7f5", deep:"#2a7068" },
-        rose:  { DEFAULT:"#f29eab", dark:"#c47d8b", berry:"#9b4f60", blush:"#fde8ec", petal:"#f7bbc3" },
-        gold:  { DEFAULT:"#f5c842", pale:"#fff8dc", deep:"#a07a10" },
-        ink:   "#1a2e2b",
-        mist:  "#557570",
-        sand:  "#fdf8f2",
-        pearl: "#fff9fb",
-        lace:  "#f5eef0",
-        dust:  "#ddd0d3",
+        primary: {
+          DEFAULT: "#E29598",
+          dark: "#C87679",
+          light: "#F0A9AC",
+          pale: "#FDEAEB",
+        },
+        dark: "#6A5C5C",
+        neutral: {
+          50: "#FDF8F5",
+          100: "#F3EBE1",
+          200: "#E6DCD1",
+          500: "#8C7C7C",
+        },
+        green: {
+          DEFAULT: "#98A892",
+          dark: "#7D8C78",
+          pale: "#EBF1E9",
+        }
       },
       fontFamily: {
-        display: ["'Playfair Display'","Georgia","serif"],
-        script:  ["'Sacramento'","cursive"],
-        body:    ["'Quicksand'","ui-sans-serif","sans-serif"],
+        display: ["'Great Vibes'", "cursive"],
+        body: ["'Nunito'", "system-ui", "sans-serif"],
+        serif: ["'Lora'", "serif"],
       },
       borderRadius: {
         "4xl":"2rem","5xl":"2.5rem","6xl":"3rem","blob":"30% 70% 70% 30%/30% 30% 70% 70%",
       },
       boxShadow: {
-        teal:  "0 8px 32px rgba(93,191,176,.28)",
-        rose:  "0 8px 32px rgba(196,125,139,.22)",
-        gold:  "0 8px 32px rgba(245,200,66,.30)",
-        card:  "0 2px 24px rgba(26,46,43,.07)",
-        lift:  "0 16px 48px rgba(26,46,43,.14)",
+        primary: "0 8px 32px rgba(233,30,140,.28)",
+        "primary-lg": "0 16px 48px rgba(233,30,140,.35)",
+        card: "0 2px 16px rgba(0,0,0,.06)",
       },
       keyframes: {
         fadeUp:     {"0%":{opacity:0,transform:"translateY(24px)"},"100%":{opacity:1,transform:"translateY(0)"}},

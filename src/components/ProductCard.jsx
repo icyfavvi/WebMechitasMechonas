@@ -23,34 +23,26 @@ export default function ProductCard({ product, onAddToCart }) {
 
   return (
     <article
-      className={`group relative flex flex-col rounded-3xl overflow-hidden border transition-all duration-300 hover:-translate-y-2 ${
-        isPet
-          ? "bg-[#fffef7] border-[#f0dfa0] hover:shadow-gold"
-          : "bg-white border-dust hover:shadow-rose"
-      }`}
+      className="group relative flex flex-col rounded-3xl overflow-hidden border border-neutral-200 transition-all duration-300 hover:-translate-y-2 bg-white hover:shadow-primary hover:border-primary/30"
     >
       {/* Imagen */}
-      <div className={`relative aspect-square overflow-hidden ${
-        isPet
-          ? "bg-gradient-to-br from-gold-pale to-[#fff8dc]"
-          : "bg-gradient-to-br from-teal-pale to-rose-blush"
-      }`}>
+      <div className="relative aspect-square overflow-hidden bg-neutral-100">
         {!imgErr && product.image ? (
           <img
             src={product.image}
             alt={product.name}
             onError={() => setImgErr(true)}
-            className="w-full h-full object-cover group-hover:scale-[1.07] transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-mist font-body text-sm font-semibold">Imagen no disponible</span>
+            <span className="text-neutral-500 font-body text-sm font-semibold">Imagen no disponible</span>
           </div>
         )}
 
         {/* Etiqueta de oferta */}
         {onSale && (
-          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide bg-rose-berry text-white">
+          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide bg-primary text-white">
             ¡Oferta!{disc ? ` -${disc}%` : ""}
           </span>
         )}
@@ -58,13 +50,13 @@ export default function ProductCard({ product, onAddToCart }) {
 
       {/* Cuerpo */}
       <div className="flex flex-col flex-1 p-4 gap-2.5">
-        <h3 className="font-display font-bold text-[15px] text-ink leading-snug line-clamp-2">
+        <h3 className="font-display font-semibold text-[14px] text-dark leading-snug line-clamp-2">
           {product.name}
         </h3>
 
         {/* Descripción corta */}
         {product.description && (
-          <p className="font-body text-xs text-mist line-clamp-2 -mt-1">
+          <p className="font-body text-xs text-neutral-500 line-clamp-2 -mt-1">
             {product.description}
           </p>
         )}
@@ -73,7 +65,7 @@ export default function ProductCard({ product, onAddToCart }) {
         {product.sizes?.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {product.sizes.map((s) => (
-              <span key={s} className="font-body text-[10px] font-semibold text-ink/60 bg-sand border border-dust rounded-full px-2 py-0.5">
+              <span key={s} className="font-body text-[10px] font-semibold text-neutral-500 bg-neutral-50 border border-neutral-200 rounded-full px-2 py-0.5">
                 {s}
               </span>
             ))}
@@ -82,11 +74,11 @@ export default function ProductCard({ product, onAddToCart }) {
 
         {/* Precio */}
         <div className="flex items-baseline gap-2 mt-auto">
-          <span className={`font-body font-black text-lg ${isPet ? "text-teal-dark" : "text-rose-berry"}`}>
+          <span className="font-display font-black text-[18px] text-primary">
             ${displayPrice.toLocaleString("es-CL")}
           </span>
           {onSale && (
-            <span className="font-body text-dust text-sm line-through">
+            <span className="font-display text-neutral-500 text-[12px] line-through">
               ${product.price.toLocaleString("es-CL")}
             </span>
           )}
@@ -96,15 +88,13 @@ export default function ProductCard({ product, onAddToCart }) {
         <button
           onClick={handleAdd}
           id={`add-product-${product.id}`}
-          className={`mt-1 w-full flex items-center justify-center rounded-full py-2.5 text-[13px] font-bold transition-all duration-200 active:scale-95 ${
+          className={`mt-1 w-full flex items-center justify-center rounded-full py-2.5 font-bold text-sm transition-all duration-200 active:scale-95 ${
             added
-              ? "bg-teal text-white"
-              : isPet
-              ? "bg-gold-pale text-gold-deep hover:bg-gold hover:text-white border border-gold/40"
-              : "bg-rose-blush text-rose-berry hover:bg-rose-petal border border-rose-petal"
+              ? "bg-dark text-white"
+              : "bg-primary hover:bg-primary-dark text-white shadow-primary"
           }`}
         >
-          {added ? "Agregado" : "Agregar"}
+          {added ? "Agregado" : "Agregar al carrito"}
         </button>
       </div>
     </article>

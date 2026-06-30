@@ -40,12 +40,12 @@ function StatusTimeline({ history }) {
                 className="w-2 h-2 rounded-full border-2 flex-shrink-0"
                 style={{ backgroundColor: st?.colors.bg ?? "#eee", borderColor: st?.colors.border ?? "#ccc" }}
               />
-              {i < arr.length - 1 && <div className="w-px flex-1 mt-1 mb-1 bg-dust" />}
+              {i < arr.length - 1 && <div className="w-px flex-1 mt-1 mb-1 bg-neutral-200" />}
             </div>
             <div className="pb-3">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-body font-semibold text-xs text-ink">{st?.label ?? entry.status}</span>
-                <span className="font-body text-xs text-mist">
+                <span className="font-body font-bold text-xs text-dark">{st?.label ?? entry.status}</span>
+                <span className="font-body text-xs text-neutral-500">
                   {new Date(entry.timestamp).toLocaleString("es-CL", {
                     day: "2-digit", month: "2-digit", year: "numeric",
                     hour: "2-digit", minute: "2-digit",
@@ -53,7 +53,7 @@ function StatusTimeline({ history }) {
                 </span>
               </div>
               {entry.note && (
-                <p className="font-body text-xs text-mist mt-0.5 italic">"{entry.note}"</p>
+                <p className="font-body text-xs text-neutral-500 mt-0.5 italic">"{entry.note}"</p>
               )}
             </div>
           </div>
@@ -68,7 +68,7 @@ function OrderCard({ order }) {
   const nItems = (order.items ?? []).reduce((s, i) => s + i.qty, 0)
 
   return (
-    <div className="bg-white rounded-2xl border border-dust shadow-card overflow-hidden">
+    <div className="bg-white rounded-2xl border border-neutral-200 shadow-card overflow-hidden">
       <div className="flex">
         <div
           className="w-1 flex-shrink-0"
@@ -79,14 +79,14 @@ function OrderCard({ order }) {
           <div className="flex flex-wrap items-start gap-3 justify-between">
             <div className="flex flex-col gap-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-display font-bold text-sm text-ink">{order.id}</span>
+                <span className="font-display font-bold text-sm text-dark">{order.id}</span>
                 <StatusBadge statusKey={order.status} />
               </div>
-              <p className="font-body text-xs text-mist">{fmtFechaHora(order.created_at)}</p>
+              <p className="font-body text-xs text-neutral-500">{fmtFechaHora(order.created_at)}</p>
             </div>
             <div className="text-right flex-shrink-0">
-              <p className="font-display font-black text-xl text-ink">{fmtCLP(order.total)}</p>
-              <p className="font-body text-xs text-mist">
+              <p className="font-display font-black text-xl text-dark">{fmtCLP(order.total)}</p>
+              <p className="font-body text-xs text-neutral-500">
                 {nItems} {nItems === 1 ? "unidad" : "unidades"}
               </p>
             </div>
@@ -94,29 +94,29 @@ function OrderCard({ order }) {
 
           <button
             onClick={() => setOpen((o) => !o)}
-            className="mt-3 font-body font-semibold text-xs text-mist hover:text-ink px-3 py-1.5 rounded-full border border-dust hover:border-ink/30 transition-all"
+            className="mt-3 font-body font-bold text-xs text-neutral-500 hover:text-dark px-3 py-1.5 rounded-full border border-neutral-200 hover:border-dark/30 transition-all"
           >
             {open ? "Ocultar detalle" : "Ver detalle"}
           </button>
 
           {open && (
-            <div className="mt-4 border-t border-dust pt-4 flex flex-col gap-4">
+            <div className="mt-4 border-t border-neutral-200 pt-4 flex flex-col gap-4">
               {/* Productos */}
               <div>
-                <p className="font-body text-xs text-mist uppercase tracking-wider mb-2">Productos</p>
+                <p className="font-body text-xs text-neutral-500 uppercase tracking-wider mb-2">Productos</p>
                 <div className="flex flex-col gap-2">
                   {(order.items ?? []).map((item, idx) => (
                     <div key={idx} className="flex items-center gap-3">
                       {item.image && (
-                        <div className="w-10 h-10 rounded-lg overflow-hidden bg-sand flex-shrink-0 border border-dust/30">
+                        <div className="w-10 h-10 rounded-lg overflow-hidden bg-neutral-100 flex-shrink-0 border border-neutral-200">
                           <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                         </div>
                       )}
                       <div className="flex-1 min-w-0">
-                        <p className="font-body font-semibold text-xs text-ink line-clamp-1">{item.name}</p>
-                        <p className="font-body text-xs text-mist">{fmtCLP(item.price)} × {item.qty}</p>
+                        <p className="font-body font-bold text-xs text-dark line-clamp-1">{item.name}</p>
+                        <p className="font-body text-xs text-neutral-500">{fmtCLP(item.price)} × {item.qty}</p>
                       </div>
-                      <p className="font-body font-bold text-xs text-ink flex-shrink-0">
+                      <p className="font-body font-bold text-xs text-dark flex-shrink-0">
                         {fmtCLP(item.price * item.qty)}
                       </p>
                     </div>
@@ -125,33 +125,33 @@ function OrderCard({ order }) {
               </div>
 
               {/* Totales */}
-              <div className="flex flex-col gap-1.5 text-xs font-body border-t border-dust pt-3">
+              <div className="flex flex-col gap-1.5 text-xs font-body border-t border-neutral-200 pt-3">
                 <div className="flex justify-between">
-                  <span className="text-mist">Subtotal</span>
-                  <span className="text-ink font-semibold">{fmtCLP(order.subtotal)}</span>
+                  <span className="text-neutral-500">Subtotal</span>
+                  <span className="text-dark font-bold">{fmtCLP(order.subtotal)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-mist">Envío</span>
+                  <span className="text-neutral-500">Envío</span>
                   {order.shipping_is_free
-                    ? <span className="text-teal-dark font-semibold">GRATIS</span>
-                    : <span className="text-ink font-semibold">{fmtCLP(order.shipping_cost)}</span>
+                    ? <span className="text-primary font-bold">GRATIS</span>
+                    : <span className="text-dark font-bold">{fmtCLP(order.shipping_cost)}</span>
                   }
                 </div>
-                <div className="flex justify-between font-bold text-sm border-t border-dust pt-1.5 mt-1">
-                  <span className="text-ink">Total</span>
-                  <span className="text-ink">{fmtCLP(order.total)}</span>
+                <div className="flex justify-between font-bold text-sm border-t border-neutral-200 pt-1.5 mt-1">
+                  <span className="text-dark">Total</span>
+                  <span className="text-dark">{fmtCLP(order.total)}</span>
                 </div>
               </div>
 
               {/* Envío */}
               <div>
-                <p className="font-body text-xs text-mist uppercase tracking-wider mb-1">
+                <p className="font-body text-xs text-neutral-500 uppercase tracking-wider mb-1">
                   Información de envío
                 </p>
                 {order.shipping_region && (
-                  <p className="font-body text-xs text-ink font-semibold">{order.shipping_region}</p>
+                  <p className="font-body text-xs text-dark font-bold">{order.shipping_region}</p>
                 )}
-                <p className="font-body text-xs text-mist">
+                <p className="font-body text-xs text-neutral-500">
                   {[order.customer_address, order.customer_comuna].filter(Boolean).join(", ")}
                 </p>
               </div>
@@ -159,16 +159,16 @@ function OrderCard({ order }) {
               {/* Observaciones */}
               {order.notes && (
                 <div>
-                  <p className="font-body text-xs text-mist uppercase tracking-wider mb-1">
+                  <p className="font-body text-xs text-neutral-500 uppercase tracking-wider mb-1">
                     Observaciones
                   </p>
-                  <p className="font-body text-xs text-ink">{order.notes}</p>
+                  <p className="font-body text-xs text-dark">{order.notes}</p>
                 </div>
               )}
 
               {/* Historial */}
               <div>
-                <p className="font-body text-xs text-mist uppercase tracking-wider">
+                <p className="font-body text-xs text-neutral-500 uppercase tracking-wider">
                   Historial de estado
                 </p>
                 <StatusTimeline history={order.status_history ?? []} />
@@ -211,17 +211,14 @@ export default function UserPanel({ user, isAdmin, onNavigate, onLogout }) {
   useEffect(() => { loadOrders() }, [loadOrders])
 
   return (
-    <div className="min-h-screen bg-sand font-body">
+    <div className="min-h-screen bg-neutral-50 font-body">
       {/* Encabezado */}
-      <div className="bg-ink text-white">
+      <div className="bg-dark text-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-10 py-5 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-4">
-            <img
-              src="/image_11cb63.png"
-              alt="Mechitas Mechonas"
-              className="h-8 w-auto object-contain opacity-90 cursor-pointer"
-              onClick={() => onNavigate("shop")}
-            />
+            <h2 className="font-display font-black text-2xl text-white leading-tight cursor-pointer" onClick={() => onNavigate("shop")}>
+              Mechitas<br />Mechonas
+            </h2>
             <div className="h-6 w-px bg-white/20" />
             <div>
               <h1 className="font-display font-bold text-base text-white leading-tight">Mi Cuenta</h1>
@@ -255,32 +252,32 @@ export default function UserPanel({ user, isAdmin, onNavigate, onLogout }) {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-10 py-8">
         <div className="mb-8">
-          <h2 className="font-display font-bold text-2xl text-ink mb-1">Hola, {nombre}</h2>
-          <p className="font-body text-sm text-mist">Aquí puedes revisar el estado de tus pedidos.</p>
+          <h2 className="font-display font-bold text-2xl text-dark mb-1">Hola, {nombre}</h2>
+          <p className="font-body text-sm text-neutral-500">Aquí puedes revisar el estado de tus pedidos.</p>
         </div>
 
         {error && (
-          <div className="bg-rose-blush border border-rose-berry/30 rounded-2xl px-5 py-4 mb-6">
-            <p className="font-body font-semibold text-sm text-rose-berry">{error}</p>
-            <button onClick={loadOrders} className="font-body text-xs text-rose-berry underline mt-1">
+          <div className="bg-red-50 border border-red-200 rounded-2xl px-5 py-4 mb-6">
+            <p className="font-body font-bold text-sm text-red-500">{error}</p>
+            <button onClick={loadOrders} className="font-body text-xs text-red-500 underline mt-1">
               Reintentar
             </button>
           </div>
         )}
 
         {loading ? (
-          <div className="bg-white rounded-3xl border border-dust p-12 text-center">
-            <p className="font-body text-sm text-mist">Cargando tus pedidos...</p>
+          <div className="bg-white rounded-3xl border border-neutral-200 p-12 text-center">
+            <p className="font-body text-sm text-neutral-500">Cargando tus pedidos...</p>
           </div>
         ) : orders.length === 0 ? (
-          <div className="bg-white rounded-3xl border border-dust p-12 text-center">
-            <p className="font-display font-bold text-xl text-ink mb-2">Sin pedidos aún</p>
-            <p className="font-body text-sm text-mist mb-6">
+          <div className="bg-white rounded-3xl border border-neutral-200 p-12 text-center">
+            <p className="font-display font-bold text-xl text-dark mb-2">Sin pedidos aún</p>
+            <p className="font-body text-sm text-neutral-500 mb-6">
               Cuando realices una compra, aparecerán aquí.
             </p>
             <button
               onClick={() => onNavigate("shop")}
-              className="bg-ink hover:bg-ink/90 text-white font-bold rounded-full px-8 py-3 text-sm transition-all"
+              className="bg-primary hover:bg-primary-dark text-white font-bold rounded-full px-8 py-3 text-sm transition-all shadow-primary"
             >
               Ir al catálogo
             </button>
